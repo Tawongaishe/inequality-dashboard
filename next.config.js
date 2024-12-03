@@ -1,5 +1,5 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+
+  const nextConfig = {
     output: 'export',
     basePath: '/inequality-dashboard',
     images: { unoptimized: true },
