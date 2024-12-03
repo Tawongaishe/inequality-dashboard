@@ -2,11 +2,25 @@
 
 import { useState, useEffect } from 'react';
 
+interface RegionData {
+  EMEA: number;
+  NAM: number;
+  APAC: number;
+  LATAM: number;
+}
+
 interface IncomeResult {
   income: number;
   medianDifference: number;
   currency: string;
 }
+
+({
+  baseData: [],
+  ageData: [],
+  genderData: [],
+  educationData: []
+});
 
 const IncomeDashboard = () => {
   const [data, setData] = useState({
@@ -52,17 +66,18 @@ const IncomeDashboard = () => {
       }
     };
 
+    
     const loadData = async () => {
       try {
-        const baseData = await fetchBaseData();
+        const fetchedBaseData = await fetchBaseData();
         setData({
-          baseData,
+          baseData: fetchedBaseData,
           ageData: Object.entries(hardcodedData.age).map(([age, values]) => 
-            [age, values.EMEA, values.NAM, values.APAC, values.LATAM]),
+            [age, String(values.EMEA), String(values.NAM), String(values.APAC), String(values.LATAM)]),
           genderData: Object.entries(hardcodedData.gender).map(([gender, values]) => 
-            [gender, values.EMEA, values.NAM, values.APAC, values.LATAM]),
+            [gender, String(values.EMEA), String(values.NAM), String(values.APAC), String(values.LATAM)]),
           educationData: Object.entries(hardcodedData.education).map(([edu, values]) => 
-            [edu, values.EMEA, values.NAM, values.APAC, values.LATAM])
+            [edu, String(values.EMEA), String(values.NAM), String(values.APAC), String(values.LATAM)])
         });
         setIsLoading(false);
       } catch (error) {
